@@ -13,7 +13,8 @@ var connect = require('gulp-connect');
 
 
 var path = {
-    dist:{
+    www:{
+		dist: "dist/**/*",
 		main: "dist/",
 		scripts: "dist/scripts",
 		styles: "dist/styles"
@@ -43,25 +44,32 @@ var path = {
 	],
 	web:[
 		"web/Main/index.html"
-	]
+	],
+	api:[
+		"../API/**/*"
+	],
+	dist: {
+		dist: "../dist",
+		public: "../dist/public"
+	}
 };
 
 // Moves the main index.html file
 var web = function() {
 	return gulp.src(path.web)
-		.pipe(gulp.dest(path.dist.main))
+		.pipe(gulp.dest(path.www.main));
 };
 var scripts = function() {
 	return gulp.src(path.scripts)
 		.pipe(concat('app.js'))
 		.pipe(rename('app.min.js'))
-		.pipe(gulp.dest(path.dist.scripts))
+		.pipe(gulp.dest(path.www.scripts));
 };
 var library = function() {
 	return gulp.src(path.library)
 		.pipe(concat('lib.js'))
 		.pipe(rename('lib.min.js'))
-		.pipe(gulp.dest(path.dist.scripts))
+		.pipe(gulp.dest(path.www.scripts));
 };
 var templates = function() {
 	return gulp.src(path.templates)
@@ -71,18 +79,18 @@ var templates = function() {
 		.pipe(wrap('Handlebars.template(<%= contents %>)'))
 		.pipe(declare({
 			namespace: 'Handlebars.templates',
-			noRedeclare: true, // Avoid duplicate declarations
+			noRedeclare: true // Avoid duplicate declarations
 		}))
 		//.pipe(uglify())
 		.pipe(concat('templates.js'))
 		.pipe(rename('templates.min.js'))
-		.pipe(gulp.dest(path.dist.scripts))
+		.pipe(gulp.dest(path.www.scripts));
 };
 var styles = function() {
 	return gulp.src(path.bootstrap)
 		.pipe(concat('styles.css'))
 		.pipe(rename('styles.min.css'))
-		.pipe(gulp.dest(path.dist.styles))
+		.pipe(gulp.dest(path.www.styles));
 };
 
 gulp.task('web', ['clean'], web);
@@ -121,7 +129,7 @@ gulp.task('watch', function() {
 
 // Cleans the directories
 gulp.task('clean', function() {
-    return gulp.src(path.dist.main, {read: false})
+    return gulp.src(path.www.main, {read: false})
 		.pipe(clean());
 });
 
@@ -134,5 +142,21 @@ gulp.task('serve', ['watch'], function() {
 	});
 });
 
-// Default Task
-gulp.task('default', ['web', 'styles', 'scripts', 'library', 'templates']);
+// Handles compiling the front-end client
+gulp.task('www', ['web', 'styles', 'scripts', 'library', 'templates', 'api'], function(){
+	return gulp.src(path.www.dist)
+		.pipe(gulp.dest(path.dist.public));
+});
+
+// Handles compiling the back-end API
+gulp.task('api', ['clean'], function(){
+	return gulp.src(path.api)
+		.pipe(gulp.dest(path.dist.dist));
+});
+
+// Default task
+gulp.task('default', ['api', 'www']);
+
+
+
+
