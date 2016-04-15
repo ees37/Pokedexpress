@@ -1,9 +1,9 @@
-var exampleModule = require("Modules/exampleModule.js");
+var exampleModule = require("Modules/exampleModule.js"); // Pulls module from a local file
 
 module.exports = {
     getRoutes: function(app){
-        app.use('/', exampleModule);
-        app.use('/users', exampleModule.login);
+        app.get('/', exampleModule.getSomething);
+        app.get('/users', exampleModule.login);
     }
 };
 
