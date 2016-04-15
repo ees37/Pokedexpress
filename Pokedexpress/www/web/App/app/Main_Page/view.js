@@ -2,17 +2,22 @@
     "use strict";
     this.App.module("MainController.HomePage", function(HomePage, App, Backbone, Marionette, $, _){
 
-        HomePage.MainLayout = Backbone.Marionette.ItemView.extend({
+        HomePage.MainLayout = Backbone.Marionette.LayoutView.extend({
             template: "main_layout",
             tagName: "div",
-            events:{
-                "click #queryButton": "submitBtnClick"
-            },
+            serializeData:function(){
+                var sqlQueryResult = this.options.sqlQueryResult;
 
-            submitBtnClick: function(event){
-                debugger;
+                return {
+                    sqlQueryResult: sqlQueryResult
+                }
+            },
+            triggers:{
+                "click #queryButton": "submit:Btn:Clicked"
             }
         });
+        
+        
 
     })
 }).call(this);

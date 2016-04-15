@@ -6,20 +6,28 @@
             showView: function (options) {
                 var _this = this;
 
-                App.request("get:Main:Entity", function(data){
+                var homePage = _this.getLayoutView("");
+                App.mainRegion.show(homePage);
+
+                App.listenTo(homePage, "submit:Btn:Click", function(sqlQuery){
                     debugger;
-                    var homePage = _this.getLayoutView(data);
-                    App.mainRegion.show(homePage);
+                    App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
+                        homePage = _this.getLayoutView({
+                            sqlQueryResult: sqlQueryResult
+                        });
 
-                    App.listenTo("submit:Btn:Click", function(sqlQuery){
-
+                        App.mainRegion.show(homePage);
                     });
+                });
+
+                App.listenTo(homePage, "destroy", function(){
+                    _this.HomePage.Controller.destroy();
                 });
             },
 
             getLayoutView: function(data){
                 return new HomePage.MainLayout({
-                    data: data
+                    sqlQueryResult: data.sqlQueryResult
                 });
             }
         };
