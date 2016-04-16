@@ -1,25 +1,24 @@
 <div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-10" >
-            <textarea id="#QueryTextBox" placeholder="Type in SQL queries (etc. SELECT * FROM TABLE)..." style="resize: none; width: 900px; height: 200px;"></textarea>
+        <div class="col-md-10">
+            <textarea id="#ResulTextBox" readonly="readonly" style="resize: none; width: 100%; height: 300px; overflow: scroll; border: double black;">{{sqlQueryResult}}</textarea>
         </div>
         <div class="col-md-1"></div>
     </div>
     <div class="row">
-        <div class="col-md-8"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-10" >
+            <textarea id="#QueryTextBox" placeholder="Type in SQL queries (etc. SELECT * FROM TABLE)..." style="resize: none; width: 100%; height: 300px;  border: double black;"></textarea>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-10"></div>
         <div class="col-md-2">
-            <button type="submit" id="queryButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+            <button type="submit" id="queryButton" data-loading-text="Loading..." class="btn btn-lg btn-primary" autocomplete="off">
                 Query
             </button>
         </div>
-        <div class="col-md-2"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <textarea id="#ResulTextBox" readonly="true" style="resize: none; width: 900px; height: 200px; overflow: scroll">{{sqlQueryResult}}</textarea>
-        </div>
-        <div class="col-md-1"></div>
     </div>
 </div>

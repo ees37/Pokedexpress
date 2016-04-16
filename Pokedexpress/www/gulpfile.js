@@ -17,7 +17,8 @@ var path = {
 		dist: "dist/**/*",
 		main: "dist/",
 		scripts: "dist/scripts",
-		styles: "dist/styles"
+		styles: "dist/styles",
+		images: "dist/images"
 	},
 	scripts:[
 		"web/App/App.js",
@@ -42,9 +43,10 @@ var path = {
 		"node_modules/backbone.marionette/lib/backbone.marionette.min.js",
 		"node_modules/handlebars/dist/handlebars.runtime.min.js"
 	],
-	web:[
-		"web/Main/index.html"
-	],
+	web: {
+		main: "web/Main/index.html",
+		images: "web/Main/images/*"
+	},
 	api:[
 		"../API/**/*"
 	],
@@ -56,8 +58,10 @@ var path = {
 
 // Moves the main index.html file
 var web = function() {
-	return gulp.src(path.web)
+	gulp.src(path.web.main)
 		.pipe(gulp.dest(path.www.main));
+	gulp.src(path.web.images)
+		.pipe(gulp.dest(path.www.images));
 };
 var scripts = function() {
 	return gulp.src(path.scripts)
@@ -111,7 +115,7 @@ gulp.task('styles', ['clean'], styles);
 gulp.task('watch', function() {
 	var watch_scripts = gulp.watch(path.scripts, scripts),
 		watch_templates = gulp.watch(path.templates, templates),
-		watch_web = gulp.watch(path.web, web);
+		watch_web = gulp.watch(path.web.main, web);
 
 	watch_scripts.on('change', function(event){
 		console.log('File ' + event.path + ' was ' + event.type + '.\n');
@@ -136,7 +140,7 @@ gulp.task('clean', function() {
 // Runs a local web server
 gulp.task('serve', ['watch'], function() {
     connect.server({
-		root: path.dist.public,
+		root: path.www.main,
 		host: "localhost",
 		port: 3030
 	});
