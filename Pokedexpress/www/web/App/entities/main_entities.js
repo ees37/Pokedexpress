@@ -13,7 +13,7 @@
 
         var API = {
 
-            getMainQuery: function(sqlQuery, callBack){
+            getQuery: function(sqlQuery, callBack){
                 return $.ajax({
                     url: App.options.IPAddr,
                     type: 'GET',
@@ -21,7 +21,6 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
                         var collection = new Entities.QueryCollection(response);
-                        console.log(collection);
                         callBack(collection);
                     },
                     error: function () {
@@ -32,7 +31,7 @@
         };
 
         App.reqres.setHandler('get:Main:Query', function(sqlQuery, callBack){
-            return API.getMainQuery(sqlQuery, callBack);
+            return API.getQuery(sqlQuery, callBack);
         });
 
     })

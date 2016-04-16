@@ -6,17 +6,18 @@
             showView: function (options) {
                 var _this = this;
 
-                var homePage = _this.getLayoutView("");
+                var homePage = _this.getLayoutView(),
+                    textView = _this.getTextView("");
                 App.mainRegion.show(homePage);
+                homePage.textRegion.show(textView);
 
-                App.listenTo(homePage, "submit:Btn:Click", function(sqlQuery){
-                    debugger;
+                homePage.listenTo(textView, "Submit:Btn:Clicked", function(sqlQuery){
                     App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
-                        homePage = _this.getLayoutView({
+                        textView = _this.getTextView({
                             sqlQueryResult: sqlQueryResult
                         });
 
-                        App.mainRegion.show(homePage);
+                        homePage.textRegion.show(textView);
                     });
                 });
 
@@ -25,8 +26,12 @@
                 });
             },
 
-            getLayoutView: function(data){
-                return new HomePage.MainLayout({
+            getLayoutView: function(){
+                return new HomePage.MainLayout();
+            },
+
+            getTextView: function(data){
+                return new HomePage.TextView({
                     sqlQueryResult: data.sqlQueryResult
                 });
             }

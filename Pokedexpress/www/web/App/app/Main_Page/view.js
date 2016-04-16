@@ -5,6 +5,14 @@
         HomePage.MainLayout = Backbone.Marionette.LayoutView.extend({
             template: "main_layout",
             tagName: "div",
+            regions:{
+                textRegion: "#textAreaRegion"
+            }
+        });
+
+        HomePage.TextView = Backbone.Marionette.ItemView.extend({
+            template: "text_area_layout",
+            tagName: "div",
             serializeData:function(){
                 var sqlQueryResult = this.options.sqlQueryResult;
 
@@ -12,10 +20,14 @@
                     sqlQueryResult: sqlQueryResult
                 }
             },
-            triggers:{
-                "click #queryButton": "submit:Btn:Clicked"
+            events:{
+                "click #queryButton": "submitBtn"
+            },
+            submitBtn: function(event){
+                var sqlQuery = $("#QueryTextBox").val();
+                this.trigger("Submit:Btn:Clicked", sqlQuery);
             }
-        });
+        })
         
         
 
