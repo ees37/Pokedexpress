@@ -14,12 +14,15 @@
         var API = {
 
             getQuery: function(sqlQuery, callBack){
+                console.log("sqlQuery: " + sqlQuery);
                 return $.ajax({
-                    url: App.options.IPAddr,
+                    url: "/home",
                     type: 'GET',
                     data: { sqlQuery: sqlQuery} ,
+                    datatype: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
+                        console.log(response);
                         var collection = new Entities.QueryCollection(response);
                         callBack(collection);
                     },
