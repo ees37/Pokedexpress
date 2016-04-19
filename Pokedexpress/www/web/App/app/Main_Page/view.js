@@ -10,22 +10,55 @@
             }
         });
 
-        HomePage.TextView = Backbone.Marionette.ItemView.extend({
+        HomePage.TextItemView = Backbone.Marionette.ItemView.extend({
+            template: "text_area_item",
+            tagName: "tr",
+            serializeData: function(){
+                var data = this.model;
+                
+                return {
+                    field: data.get("field"),
+                    value: data.get("value")
+                }
+            }
+        });
+
+        HomePage.TextEmptyItemView = Backbone.Marionette.ItemView.extend({
+            template: "text_area_empty_item"
+        });
+
+        HomePage.TextView = Backbone.Marionette.CompositeView.extend({
             template: "text_area_layout",
             tagName: "div",
-            serializeData:function(){
-                var sqlQueryResult = this.options.sqlQueryResult;
-
-                return {
-                    sqlQueryResult: sqlQueryResult
-                }
-            },
+            emptyView: HomePage.TextEmptyItemView,
+            childView: HomePage.TextItemView,
+            childViewContainer: "tbody",
             events:{
                 "click #queryButton": "submitBtn"
             },
             submitBtn: function(event){
                 var sqlQuery = $("#QueryTextBox").val();
+                debugger;
                 this.trigger("Submit:Btn:Clicked", sqlQuery);
+            },
+            templateHelpers:function(){
+                var _this = this;
+                return ({
+                   getHeaders: function(){
+                       var data = _this.collection,
+                           headers = "",
+                           results = "";
+                       if(data !== undefined && data.length > 0) {
+                           headers = _.keys(data.models[0]["attributes"]);
+
+                           headers.forEach(function(header){
+                               results += "<th>" + header + "</th>";
+                           });
+                       }
+
+                       return results;
+                   }
+                });
             }
         })
         

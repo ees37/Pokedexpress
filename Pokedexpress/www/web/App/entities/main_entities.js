@@ -14,22 +14,32 @@
         var API = {
 
             getQuery: function(sqlQuery, callBack){
-                console.log("sqlQuery: " + sqlQuery);
-                return $.ajax({
-                    url: "/home",
-                    type: 'GET',
-                    data: { sqlQuery: sqlQuery} ,
-                    datatype: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (response) {
-                        console.log(response);
-                        var collection = new Entities.QueryCollection(response);
-                        callBack(collection);
-                    },
-                    error: function () {
-                        alert("ERROR: Failed to get Main Query.");
-                    }
-                });
+
+                var response = [
+                    {field: "field1", value: "value1"},
+                    {field: "field2", value: "value2"},
+                    {field: "field3", value: "value3"},
+                    {field: "field4", value: "value4"}
+                ];
+
+                var collection = new Entities.QueryCollection(response);
+
+                callBack(collection);
+                // return $.ajax({
+                //     url: "/home",
+                //     type: 'GET',
+                //     data: { sqlQuery: sqlQuery} ,
+                //     datatype: 'json',
+                //     contentType: 'application/json; charset=utf-8',
+                //     success: function (response) {
+                //         console.log(response);
+                //         var collection = new Entities.QueryCollection(response);
+                //         callBack(collection);
+                //     },
+                //     error: function () {
+                //         alert("ERROR: Failed to get Main Query.");
+                //     }
+                // });
             }
         };
 

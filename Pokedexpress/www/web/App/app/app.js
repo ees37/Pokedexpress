@@ -9,7 +9,6 @@
         
         var API = {
             getHomePage: function(options){
-                console.log("Returning controller for home page");
                 return MainController.HomePage.Controller.showView();
             }
         };
@@ -20,7 +19,6 @@
         });
 
         App.addInitializer(function(options){
-            console.log('initializing MainController routing...');
             return new MainController.Router();
         });
 

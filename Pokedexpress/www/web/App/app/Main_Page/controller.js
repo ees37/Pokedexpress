@@ -12,7 +12,7 @@
                 homePage.textRegion.show(textView);
 
                 homePage.listenTo(textView, "Submit:Btn:Clicked", function(sqlQuery){
-                    console.log("Button was clicked on...");
+                    console.log("Button was clicked...");
                     App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
                         textView = _this.getTextView({
                             sqlQueryResult: sqlQueryResult
@@ -33,7 +33,7 @@
 
             getTextView: function(data){
                 return new HomePage.TextView({
-                    sqlQueryResult: data.sqlQueryResult
+                    collection: data.sqlQueryResult
                 });
             }
         };

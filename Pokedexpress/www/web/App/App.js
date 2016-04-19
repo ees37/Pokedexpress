@@ -16,15 +16,9 @@
             return Backbone.history.fragment;
         };
 
-        App.addInitializer(function(){
-            console.log('Application is initializing...');
-        });
-
         //Start history when our application is ready
         App.on('start', function() {
-            console.log('Application is starting...');
             if(Backbone.history){
-                console.log('Backbone History is starting...');
                 Backbone.history.start();
             }
 

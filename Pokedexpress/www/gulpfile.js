@@ -140,7 +140,7 @@ gulp.task('clean', function() {
 // Runs a local web server
 gulp.task('serve', ['watch'], function() {
     connect.server({
-		root: path.dist.public,
+		root: path.www.main,
 		host: "localhost",
 		port: 3030
 	});
