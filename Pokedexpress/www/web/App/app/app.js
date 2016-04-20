@@ -3,7 +3,6 @@
     this.App.module("MainController", function(MainController, App, Backbone, Marionette, $, _){
 
         var appRouterHandler = {
-           "": "getHomePage",
            "home": "getHomePage"
         };
         

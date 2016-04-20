@@ -14,13 +14,11 @@
             template: "text_area_item",
             tagName: "tr",
             serializeData: function(){
-                var data = this.model;
-                
                 return {
-                    field: data.get("field"),
-                    value: data.get("value")
+                    model: this.model["attributes"]
                 }
             }
+
         });
 
         HomePage.TextEmptyItemView = Backbone.Marionette.ItemView.extend({
@@ -38,7 +36,6 @@
             },
             submitBtn: function(event){
                 var sqlQuery = $("#QueryTextBox").val();
-                debugger;
                 this.trigger("Submit:Btn:Clicked", sqlQuery);
             },
             templateHelpers:function(){

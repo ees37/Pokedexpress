@@ -1,13 +1,19 @@
 (function(){
     "use strict";
     (function(Handlebars){
-        Handlebars.registerHelper('something', function(text, url) {
-            text = Handlebars.Utils.escapeExpression(text);
-            url  = Handlebars.Utils.escapeExpression(url);
+        Handlebars.registerHelper('getFieldValues', function(model) {
+            var values = "",
+                results = "";
 
-            var result = '<a href="' + url + '">' + text + '</a>';
+            if(model !== undefined) {
+                values = _.values(model);
 
-            return new Handlebars.SafeString(result);
+                values.forEach(function(value){
+                    results += '<td>' + value + '</td>';
+                });
+            }
+
+            return results;
         });
     }(Handlebars));
 }).call(this);

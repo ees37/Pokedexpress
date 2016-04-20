@@ -4,7 +4,7 @@
         Backbone.Marionette.Renderer.render = function ( templateId, data ) {
             var template = Handlebars.templates[templateId](data);
 
-            if(template){
+            if(template !== undefined){
                 return template;
             }
             else{

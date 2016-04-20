@@ -23,7 +23,7 @@
             }
 
             if(App.getCurrentRoute() === ""){
-                App.navigate('home');
+                App.navigate('//home');
             }
 
         });
