@@ -1,7 +1,6 @@
 (function(){
     "use strict";
     this.App.module("MainController.HomePage", function(HomePage, App, Backbone, Marionette, $, _){
-
         HomePage.Controller = {
             showView: function (options) {
                 var _this = this;
@@ -11,8 +10,7 @@
                 App.mainRegion.show(homePage);
                 homePage.textRegion.show(textView);
 
-                homePage.listenTo(textView, "Submit:Btn:Clicked", function(sqlQuery){
-                    debugger;
+                App.on("Submit:Btn:Clicked", function(sqlQuery){
                     App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
                         textView = _this.getTextView({
                             sqlQueryResult: sqlQueryResult

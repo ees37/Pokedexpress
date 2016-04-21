@@ -18,7 +18,6 @@
                     model: this.model["attributes"]
                 }
             }
-
         });
 
         HomePage.TextEmptyItemView = Backbone.Marionette.ItemView.extend({
@@ -36,7 +35,7 @@
             },
             submitBtn: function(event){
                 var sqlQuery = $("#QueryTextBox").val();
-                this.trigger("Submit:Btn:Clicked", sqlQuery);
+                App.trigger("Submit:Btn:Clicked", sqlQuery);
             },
             templateHelpers:function(){
                 var _this = this;
