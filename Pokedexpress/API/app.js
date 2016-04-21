@@ -21,8 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // connect to mysql
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'test',
-    password: 'test',
+    user: 'root',
+    password: 'root',
     database: 'pokedexpress'
 });
 
