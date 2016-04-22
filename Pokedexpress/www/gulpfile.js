@@ -18,7 +18,8 @@ var path = {
 		main: "dist/",
 		scripts: "dist/scripts",
 		styles: "dist/styles",
-		images: "dist/images"
+		images: "dist/images",
+		audio: "dist/audio"
 	},
 	scripts:[
 		"web/App/App.js",
@@ -45,7 +46,8 @@ var path = {
 	],
 	web: {
 		main: "web/Main/index.html",
-		images: "web/Main/images/*"
+		images: "web/Main/images/**/*",
+		audio: "web/Main/audio/*"
 	},
 	api:[
 		"../API/**/*"
@@ -62,6 +64,8 @@ var web = function() {
 		.pipe(gulp.dest(path.www.main));
 	gulp.src(path.web.images)
 		.pipe(gulp.dest(path.www.images));
+	gulp.src(path.web.audio)
+		.pipe(gulp.dest(path.www.audio));
 };
 var scripts = function() {
 	return gulp.src(path.scripts)

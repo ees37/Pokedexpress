@@ -12,7 +12,7 @@
 
                 App.on("Submit:Btn:Clicked", function(sqlQuery){
                     App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
-                        //Renables the query button
+                        //Re-Enables the query button
                         $("#queryButton").removeClass("disabled");
 
                         if(sqlQueryResult === "failed"){
