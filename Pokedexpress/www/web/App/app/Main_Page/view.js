@@ -34,6 +34,9 @@
                 "click #queryButton": "submitBtn"
             },
             submitBtn: function(event){
+                //Disables the query button
+                $("#queryButton").addClass("disabled");
+                
                 var sqlQuery = $("#QueryTextBox").val();
                 App.trigger("Submit:Btn:Clicked", sqlQuery);
             },

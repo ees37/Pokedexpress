@@ -12,11 +12,19 @@
 
                 App.on("Submit:Btn:Clicked", function(sqlQuery){
                     App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
-                        textView = _this.getTextView({
-                            sqlQueryResult: sqlQueryResult
-                        });
+                        //Renables the query button
+                        $("#queryButton").removeClass("disabled");
 
-                        homePage.textRegion.show(textView);
+                        if(sqlQueryResult === "failed"){
+                            alert("ERROR: Failed to query the database. Please check your connection.");
+                        }
+                        else{
+                            textView = _this.getTextView({
+                                sqlQueryResult: sqlQueryResult
+                            });
+
+                            homePage.textRegion.show(textView);
+                        }
                     });
                 });
             },

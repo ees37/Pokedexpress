@@ -22,10 +22,10 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
                         var collection = new Entities.QueryCollection(response);
-                        callBack(collection);
+                        return callBack(collection);
                     },
                     error: function () {
-                        alert("ERROR: Failed to get Main Query.");
+                        return callBack("failed");
                     }
                 });
             }
