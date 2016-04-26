@@ -3,12 +3,26 @@
     (function(Handlebars){
         Handlebars.registerHelper('getFieldValues', function(model, tableName) {
             var values = "",
-                results = "";
+                results = "",
+                audio = "",
+                image = "";
 
             if(model !== undefined) {
                 values = _.values(model);
 
-                results += '<td><img src=/images/' + tableName + '/' + values[0] + '.png></td>';
+                if(tableName === "items"){
+                    image = '<img src=/images/' + tableName + '/' + values[1] + '.png>';
+                }
+                else{
+                    image = '<img src=/images/' + tableName + '/' + values[0] + '.png>';
+                }
+
+                if(tableName === "pokemon"){
+                    audio = '<audio id="pokemon_ ' + values[0] + '" preload="auto"><source src="audio/cries/' + values[0] + '.ogg" type="audio/ogg"></audio>';
+                    audio += '<span onclick="play()" style="visibility: hidden"></span>';
+                }
+
+                results += '<td id="pokemon_ ' + values[0] + '">'+ image + audio +'</td>';
                 
                 values.forEach(function(value){
                       results += '<td>' + value + '</td>';
