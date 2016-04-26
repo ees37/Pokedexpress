@@ -20,7 +20,8 @@
                         }
                         else{
                             textView = _this.getTextView({
-                                sqlQueryResult: sqlQueryResult
+                                sqlQueryResult: sqlQueryResult,
+                                isPokemon: (sqlQuery.search("pokedexpress.pokemon") !== -1 ? true: false)
                             });
 
                             homePage.textRegion.show(textView);
@@ -35,7 +36,8 @@
 
             getTextView: function(data){
                 return new HomePage.TextView({
-                    collection: data.sqlQueryResult
+                    collection: data.sqlQueryResult,
+                    isPokemon: data.isPokemon
                 });
             }
         };

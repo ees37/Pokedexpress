@@ -15,7 +15,8 @@
             tagName: "tr",
             serializeData: function(){
                 return {
-                    model: this.model["attributes"]
+                    model: this.model["attributes"],
+                    isPokemon: this.options.isPokemon
                 }
             }
         });
@@ -30,6 +31,11 @@
             emptyView: HomePage.TextEmptyItemView,
             childView: HomePage.TextItemView,
             childViewContainer: "tbody",
+            childViewOptions: function(model, index){
+                return {
+                    isPokemon: (this.options["isPokemon"] !== undefined ? this.options["isPokemon"] : false)
+                };
+            },
             events:{
                 "click #queryButton": "submitBtn"
             },
