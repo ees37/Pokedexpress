@@ -21,7 +21,7 @@
                         else{
                             textView = _this.getTextView({
                                 sqlQueryResult: sqlQueryResult,
-                                isPokemon: (sqlQuery.search("pokedexpress.pokemon") !== -1 ? true: false)
+                                tableName: (sqlQuery.split('pokedexpress.'))[1].split(" ")[0]
                             });
 
                             homePage.textRegion.show(textView);
@@ -37,7 +37,7 @@
             getTextView: function(data){
                 return new HomePage.TextView({
                     collection: data.sqlQueryResult,
-                    isPokemon: data.isPokemon
+                    tableName: data.tableName
                 });
             }
         };

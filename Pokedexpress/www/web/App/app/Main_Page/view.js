@@ -16,7 +16,7 @@
             serializeData: function(){
                 return {
                     model: this.model["attributes"],
-                    isPokemon: this.options.isPokemon
+                    tableName: this.options.tableName
                 }
             }
         });
@@ -33,7 +33,7 @@
             childViewContainer: "tbody",
             childViewOptions: function(model, index){
                 return {
-                    isPokemon: (this.options["isPokemon"] !== undefined ? this.options["isPokemon"] : false)
+                    tableName: (this.options["tableName"] !== undefined ? this.options["tableName"] : false)
                 };
             },
             events:{
@@ -45,7 +45,7 @@
 
                 //Plays button click
                 $("#buttonClickSound")[0].play();
-                
+
                 var sqlQuery = $("#QueryTextBox").val();
                 App.trigger("Submit:Btn:Clicked", sqlQuery);
             },
@@ -58,7 +58,7 @@
                            results = "";
                        if(data !== undefined && data.length > 0) {
                            headers = _.keys(data.models[0]["attributes"]);
-
+                           results += '<th>Image</th>';
                            headers.forEach(function(header){
                                results += "<th>" + header + "</th>";
                            });
@@ -69,8 +69,8 @@
                 });
             }
         })
-        
-        
+
+
 
     })
 }).call(this);
