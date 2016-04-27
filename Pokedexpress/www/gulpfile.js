@@ -47,7 +47,7 @@ var path = {
 	web: {
 		main: "web/Main/index.html",
 		images: "web/Main/images/**/*",
-		audio: "web/Main/audio/*"
+		audio: "web/Main/audio/**/*"
 	},
 	api:[
 		"../API/**/*"

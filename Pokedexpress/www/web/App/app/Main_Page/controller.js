@@ -11,22 +11,28 @@
                 homePage.textRegion.show(textView);
 
                 App.on("Submit:Btn:Clicked", function(sqlQuery){
-                    App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
-                        //Re-Enables the query button
-                        $("#queryButton").removeClass("disabled");
+                    //Re-Enables the query button
+                    $("#queryButton").removeClass("disabled");
 
-                        if(sqlQueryResult === "failed"){
-                            alert("ERROR: Failed to query the database. Please check your connection.");
-                        }
-                        else{
-                            textView = _this.getTextView({
-                                sqlQueryResult: sqlQueryResult,
-                                tableName: (sqlQuery.split('pokedexpress.'))[1].split(" ")[0]
-                            });
+                    if(sqlQuery.length < 0 || sqlQuery === ""){
+                        alert("Invalid SQL query string.");
+                    }
+                    else{
+                        App.request("get:Main:Query", sqlQuery, function(sqlQueryResult){
+                            if(sqlQueryResult === "failed"){
+                                alert("ERROR: Failed to query the database. Please check your connection.");
+                            }
+                            else{
+                                var tableName = (sqlQuery.indexOf('pokedexpress.') !== -1 ? (sqlQuery.split('pokedexpress.'))[1].split(" ")[0] : "");
+                                textView = _this.getTextView({
+                                    sqlQueryResult: sqlQueryResult,
+                                    tableName: tableName
+                                });
 
-                            homePage.textRegion.show(textView);
-                        }
-                    });
+                                homePage.textRegion.show(textView);
+                            }
+                        });
+                    }
                 });
             },
 

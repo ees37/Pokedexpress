@@ -18,6 +18,13 @@
                     model: this.model["attributes"],
                     tableName: this.options.tableName
                 }
+            },
+            events: {
+                "click #pokemon_img": "playPokemonAudio"
+            },
+            playPokemonAudio: function(event){
+                var id = _.values(this.model["attributes"]);
+                $("#pokemon_audio_" + id)[0].play();
             }
         });
 
@@ -40,11 +47,11 @@
                 "click #queryButton": "submitBtn"
             },
             submitBtn: function(event){
-                //Disables the query button
-                $("#queryButton").addClass("disabled");
-
                 //Plays button click
                 $("#buttonClickSound")[0].play();
+
+                //Disables the query button
+                $("#queryButton").addClass("disabled");
 
                 var sqlQuery = $("#QueryTextBox").val();
                 App.trigger("Submit:Btn:Clicked", sqlQuery);
