@@ -23,7 +23,7 @@
                                 alert("ERROR: Failed to query the database. Please check your connection.");
                             }
                             else{
-                                var tableName = (sqlQuery.indexOf('pokedexpress.') !== -1 ? (sqlQuery.split('pokedexpress.'))[1].split(" ")[0] : "");
+                                var tableName = sqlQuery.split(" ")[0];
                                 textView = _this.getTextView({
                                     sqlQueryResult: sqlQueryResult,
                                     tableName: tableName
