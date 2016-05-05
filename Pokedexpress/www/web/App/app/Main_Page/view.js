@@ -65,7 +65,19 @@
                            results = "";
                        if(data !== undefined && data.length > 0) {
                            headers = _.keys(data.models[0]["attributes"]);
-                           results += '<th>Image</th>';
+
+                           switch(_this.options["tableName"])
+                           {
+                             // filter out tables that do not contain images
+                             case "pokemon":
+                             case "items":
+                             case "regions":
+                             {
+                               results += '<th>Image</th>';
+                             }
+                             default: break;
+                           }
+
                            headers.forEach(function(header){
                                results += "<th>" + header + "</th>";
                            });
